@@ -12,6 +12,8 @@
 #define ARG_DOUBLE 6
 #define ARG_STRING 7
 
+#define MAX_SRT_LEN 8192
+
 // Fetchers for every argument type
 int             fetch_int(ErlNifEnv*, ERL_NIF_TERM*);
 long            fetch_long(ErlNifEnv*, ERL_NIF_TERM*);
@@ -55,12 +57,12 @@ int format_first(ErlNifEnv*, ErlNifBinary*, char**, ERL_NIF_TERM*);
 // fwrite implementation
 static ERL_NIF_TERM
 io_libc_fwrite(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
-  char fmt[1024];
+  char fmt[MAX_STR_LEN];
   int len = 0;
 
   if((len = enif_get_string(env, argv[0], fmt, sizeof(fmt), ERL_NIF_LATIN1)) <= 0) return enif_make_badarg(env);
   if(!enif_is_list(env, argv[1])) return enif_make_badarg(env);
-  
+
   ERL_NIF_TERM items = argv[1];
 
   // At first, allocate result as empty binary
