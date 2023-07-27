@@ -12,7 +12,7 @@
 #define ARG_DOUBLE 6
 #define ARG_STRING 7
 
-#define MAX_SRT_LEN 8192
+#define MAX_STR_LEN 8192
 
 // Fetchers for every argument type
 int             fetch_int(ErlNifEnv*, ERL_NIF_TERM*);
